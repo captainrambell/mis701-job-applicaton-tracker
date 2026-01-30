@@ -27,9 +27,13 @@ SECRET_KEY = 'django-insecure-1_bxbd@-bo9se2!&ct!o(vu1!i%)g=4f2n*o#3nf4)lxqb6zcd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["localhost",
+    "127.0.0.1",
+    "mis701-job-applicaton-tracker-production.up.railway.app",]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    "mis701-job-applicaton-tracker-production.up.railway.app",
+    ]
 # Application definition
 
 INSTALLED_APPS = [
