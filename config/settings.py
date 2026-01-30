@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ["localhost",
     "mis701-job-applicaton-tracker-production.up.railway.app",]
 
 CSRF_TRUSTED_ORIGINS = [
-    "mis701-job-applicaton-tracker-production.up.railway.app",
+    "https://mis701-job-applicaton-tracker-production.up.railway.app",
     ]
 # Application definition
 
