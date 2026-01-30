@@ -1,0 +1,52 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}Dashboard - Job Application Tracker{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<h2>Application status counts</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Status</th>
+        <th>Count</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in status_counts %}
+        <tr>
+            <td>{{ item.status }}</td>
+            <td>{{ item.count }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="2">No applications yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h2>Upcoming next steps</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Job</th>
+        <th>Company</th>
+        <th>Status</th>
+        <th>Next step date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for app in upcoming_applications %}
+        <tr>
+            <td><a href="{% url 'job_detail' app.job.id %}">{{ app.job.title }}</a></td>
+            <td>{{ app.job.company }}</td>
+            <td>{{ app.status }}</td>
+            <td>{{ app.next_step_date }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="4">No upcoming next steps.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

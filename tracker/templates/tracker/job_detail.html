@@ -1,0 +1,74 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}{{ job.title }} - {{ job.company }}{% endblock %}
+
+{% block content %}
+<h1>{{ job.title }}</h1>
+<p><strong>Company:</strong> {{ job.company }}</p>
+<p><strong>Source:</strong> {{ job.source }}</p>
+<p><strong>Location:</strong> {{ job.location }}</p>
+<p><strong>URL:</strong> <a href="{{ job.url }}" target="_blank">{{ job.url }}</a></p>
+{% if job.salary_range %}
+    <p><strong>Salary range:</strong> {{ job.salary_range }}</p>
+{% endif %}
+
+<p>
+    <a href="{% url 'job_delete' job.pk %}" class="btn btn-secondary">Delete Job</a>
+</p>
+
+<h2>Application</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Save Application</button>
+</form>
+
+<h3>Application history</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Status</th>
+        <th>Applied date</th>
+        <th>Next step date</th>
+        <th>Notes</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for app in applications %}
+        <tr>
+            <td>{{ app.status }}</td>
+            <td>{{ app.applied_date }}</td>
+            <td>{{ app.next_step_date }}</td>
+            <td>{{ app.notes|linebreaksbr }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="4">No applications yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h2>Contacts</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Email</th>
+        <th>Phone</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.role }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.phone }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="4">No contacts yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
